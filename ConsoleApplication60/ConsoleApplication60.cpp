@@ -13,6 +13,7 @@ public:
 	void push_front(int data);
 	void delete_last(); 
 	void delete_first();
+	void clear();
 	int GetSize() { return Size; };
 	int& operator[](const int index);
 private:
@@ -89,21 +90,46 @@ void List::push_front(int data)
 
 void List::delete_last()
 {
-	Node *temp = tail->pPrev;
-	temp->pNext = nullptr;
-	delete tail;
-	tail = temp;
+	if (Size > 1)
+	{
+		Node *temp = tail->pPrev;
+		temp->pNext = nullptr;
+		delete tail;
+		tail = temp;
+	}
+	else
+	{
+		head = nullptr;
+		tail = nullptr;
+	}
 	Size--;
 }
 
 void List::delete_first()
 {
-	Node *temp = head->pNext;
-	temp->pPrev = nullptr;
-	delete head;
-	head = temp;
+	if (Size > 1)
+	{
+		Node *temp = head->pNext;
+		temp->pPrev = nullptr;
+		delete head;
+		head = temp;
+	}
+	else
+	{
+		head = nullptr;
+		tail = nullptr;
+	}
 	Size--;
 }
+
+void List::clear()
+{
+	while (Size)
+	{
+		delete_first();
+	}
+}
+
 
 int & List::operator[](const int index)
 {
