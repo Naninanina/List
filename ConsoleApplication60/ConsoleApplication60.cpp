@@ -10,6 +10,7 @@ public:
 
 	void Show();
 	void push_back(int data);
+	void push_front(int data);
 	int GetSize() { return Size; };
 	int& operator[](const int index);
 private:
@@ -68,6 +69,22 @@ void List::push_back(int data)
 	Size++;
 }
 
+void List::push_front(int data)
+{
+	if (head == nullptr)
+	{
+		head = tail = new Node(data);
+	}
+	else
+	{
+		Node *temp = new Node(data, nullptr, head);
+		head->pPrev = temp;
+		head = temp;
+	}
+
+	Size++;
+}
+
 int & List::operator[](const int index)
 {
 	int counter = 0;
@@ -100,7 +117,6 @@ int main()
 		cout << lst[i] << endl;
 	}
 	lst.Show();
-	int a;
-	cin >> a;
-	cout << lst[a];
+	lst.push_front(11);
+	lst.Show();
 }
