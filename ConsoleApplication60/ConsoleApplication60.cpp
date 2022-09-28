@@ -12,6 +12,7 @@ public:
 	void push_back(int data);
 	void push_front(int data);
 	void delete_last(); 
+	void delete_first();
 	int GetSize() { return Size; };
 	int& operator[](const int index);
 private:
@@ -95,6 +96,15 @@ void List::delete_last()
 	Size--;
 }
 
+void List::delete_first()
+{
+	Node *temp = head->pNext;
+	temp->pPrev = nullptr;
+	delete head;
+	head = temp;
+	Size--;
+}
+
 int & List::operator[](const int index)
 {
 	int counter = 0;
@@ -124,7 +134,7 @@ int main()
 
 	lst.Show();
 	cout << lst.GetSize() << endl;
-	lst.delete_last();
+	lst.delete_first();
 
 	lst.Show();
 	cout << lst.GetSize() << endl;
