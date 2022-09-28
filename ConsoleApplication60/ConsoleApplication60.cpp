@@ -11,6 +11,7 @@ public:
 	void Show();
 	void push_back(int data);
 	void push_front(int data);
+	void delete_last(); 
 	int GetSize() { return Size; };
 	int& operator[](const int index);
 private:
@@ -85,6 +86,15 @@ void List::push_front(int data)
 	Size++;
 }
 
+void List::delete_last()
+{
+	Node *temp = tail->pPrev;
+	temp->pNext = nullptr;
+	delete tail;
+	tail = temp;
+	Size--;
+}
+
 int & List::operator[](const int index)
 {
 	int counter = 0;
@@ -112,11 +122,10 @@ int main()
 		lst.push_back(rand() % 10);
 	}
 
-	for (int i = 0; i < lst.GetSize(); i++)
-	{
-		cout << lst[i] << endl;
-	}
 	lst.Show();
-	lst.push_front(11);
+	cout << lst.GetSize() << endl;
+	lst.delete_last();
+
 	lst.Show();
+	cout << lst.GetSize() << endl;
 }
