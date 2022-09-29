@@ -16,6 +16,7 @@ public:
 	void clear();
 	void insert(int index, int data);
 	void remove(int index);
+	void replace(int index, int data);
 	int GetSize() { return Size; };
 	int& operator[](const int index);
 private:
@@ -190,6 +191,22 @@ void List::remove(int index)
 	}
 }
 
+void List::replace(int index, int data)
+{
+	int counter = 0;
+	Node *current = this->head;
+	while (current != nullptr)
+	{
+		if (counter == index)
+		{
+			current->data = data;
+			break;
+		}
+		current = current->pNext;
+		counter++;
+	}
+}
+
 
 int & List::operator[](const int index)
 {
@@ -220,7 +237,7 @@ int main()
 
 	lst.Show();
 	cout << "Size = " << lst.GetSize() << endl;
-	lst.remove(1);
+	lst.replace(1, 11);
 	lst.Show();
 	cout << "Size = " << lst.GetSize() << endl;
 }
