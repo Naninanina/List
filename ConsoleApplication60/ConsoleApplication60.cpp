@@ -14,6 +14,7 @@ public:
 	void delete_last(); 
 	void delete_first();
 	void clear();
+	void insert(int index, int data);
 	int GetSize() { return Size; };
 	int& operator[](const int index);
 private:
@@ -42,6 +43,7 @@ List::List()
 
 List::~List()
 {
+	clear();
 }
 
 void List::Show()
@@ -112,6 +114,7 @@ void List::delete_first()
 		Node *temp = head->pNext;
 		temp->pPrev = nullptr;
 		delete head;
+			 
 		head = temp;
 	}
 	else
@@ -127,6 +130,32 @@ void List::clear()
 	while (Size)
 	{
 		delete_first();
+	}
+}
+
+void List::insert(int index, int data)
+{
+	if (index == 0)
+	{
+		push_front(data);
+	}
+	else
+	{
+		int counter = 0;
+		Node *current = this->head;
+		while (current != nullptr)
+		{
+			if (counter == index)
+			{
+				Node *temp = new Node(data, current->pPrev, current);
+				temp->pPrev->pNext = temp;
+				current->pPrev = temp;
+				Size++;
+				break;
+			}
+			current = current->pNext;
+			counter++;
+		}
 	}
 }
 
@@ -159,9 +188,6 @@ int main()
 	}
 
 	lst.Show();
-	cout << lst.GetSize() << endl;
-	lst.delete_first();
-
+	lst.insert(0, 11);
 	lst.Show();
-	cout << lst.GetSize() << endl;
 }
