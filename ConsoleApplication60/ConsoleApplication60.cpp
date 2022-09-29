@@ -18,6 +18,7 @@ public:
 	void remove(int index);
 	void replace(int index, int data);
 	int GetSize() { return Size; };
+	bool is_Empty() { return head == nullptr ? true : false; };
 	int& operator[](const int index);
 private:
 	class Node
@@ -207,7 +208,6 @@ void List::replace(int index, int data)
 	}
 }
 
-
 int & List::operator[](const int index)
 {
 	int counter = 0;
@@ -237,7 +237,5 @@ int main()
 
 	lst.Show();
 	cout << "Size = " << lst.GetSize() << endl;
-	lst.replace(1, 11);
-	lst.Show();
-	cout << "Size = " << lst.GetSize() << endl;
+	cout << lst.is_Empty();
 }
