@@ -19,6 +19,7 @@ public:
 	void replace(int index, int data);
 	int GetSize() { return Size; };
 	bool is_Empty() { return head == nullptr ? true : false; };
+	void insert_lst(List &pList);
 	int& operator[](const int index);
 private:
 	class Node
@@ -208,6 +209,22 @@ void List::replace(int index, int data)
 	}
 }
 
+void List::insert_lst(List &pList)
+{
+	int counter = pList.Size;
+	Node *current = new Node;
+	current = pList.tail;
+	pList.Show();
+	while (counter)
+	{
+		push_front(current->data);
+		current = current->pPrev;
+		counter--;
+	}
+	cout << "после вставки: ";
+	pList.Show();
+}
+
 int & List::operator[](const int index)
 {
 	int counter = 0;
@@ -237,5 +254,21 @@ int main()
 
 	lst.Show();
 	cout << "Size = " << lst.GetSize() << endl;
-	cout << lst.is_Empty();
+	List new_lst;
+	List &pNew_lst = new_lst;
+	int new_numbersCount;
+	cin >> new_numbersCount;
+
+	for (int i = 0; i < new_numbersCount; i++)
+	{
+		new_lst.push_back(rand() % 10);
+	}
+
+	new_lst.Show();
+	cout << "Size = " << new_lst.GetSize() << endl;
+	lst.insert_lst(new_lst);
+	lst.Show();
+	cout << "Size = " << lst.GetSize() << endl;
+	new_lst.Show();
+	cout << "Size = " << new_lst.GetSize() << endl;
 }
