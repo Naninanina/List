@@ -108,6 +108,7 @@ void List::delete_last()
 	}
 	else
 	{
+		delete head;
 		head = nullptr;
 		tail = nullptr;
 	}
@@ -126,6 +127,7 @@ void List::delete_first()
 	}
 	else
 	{
+		delete head;
 		head = nullptr;
 		tail = nullptr;
 	}
